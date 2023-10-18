@@ -1,0 +1,124 @@
+Todos los programas deben tener al menos declarado un package con nombre main
+se usa import para importar paquetes en go.
+func main() es la funcion donde la aplicacion de Go se ejecuta. la funcion es ejecutada por el compilador
+En go todo es acerca de tipos
+
+En go se declaran variables para los diferentes tipos de retorno de una funcion, y en el mismo orden de retorno de la funcion se declaran las variables
+Ejemplo:
+nb, err := fmt.Println("Hola")
+
+fmt.Println retorna como primer opcion un numero entero de bytes o un error, por eso la primer variable es nb o numero bytes y si retorna error en 
+envez de una respuesta exitosa el resultado de la funcion se guarda en la variable err
+En go la palabra reservada nil significa null
+_,_ := fmt.Println("Hola") // identificador en blanco o _ le indica al compilador que no se va usar el valor de retorno de la funcion
+
+// ese identificador se aplica tambien en otros lenguajes como Javascript
+:= este operador asigna datos en variables 
+= este operado se puede usar para el identificador en blanco
+
+cuando en la firma de una funcion se usa este operador ... <TipoDato> indica que es una cantidad variable de parametros. Funciona como spread operator en JS
+interface{} indica que un valor o parametro puede recibir cualquier valor. Algo como un tipo any en JS
+No se pueden declarar variables fuera de la funcion main que sean declaradas con la declaracion rapida, pero si con la palabra clave var
+No se pueden declarar variables con palabras reservadas
+
+si se declara una variable como x := 23
+no se puede usar el mismo operador para cambiar el valor de esa variable, se usa = 
+Ejemplo:
+    x := 23
+    x = 1
+
+:= -- operador de declaracion rapida 
+= -- operacion de declaracion de tipo de dato estricto o reasginacion de valor a variable
+
+si hay una variable declarada a nivel de paquete y una funcion tiene una variable con el mismo nombre de variable, 
+el scope que se sobrepone es el scope de la funcion
+
+si se declara una variable var x int -- el compilador le asgina el valor de 0
+si se declara una variable var x string -- el compilador le asgina el valor de ''
+
+En go se pueden tener solo declaraciones fuera de la funcion main, no asignaciones
+
+siempre tratar de declarar variables que tengan un scope local para evitar sobreescritura de valores
+
+cuando se crea un tipo en go se especifica el nombre del nuevotipo y el tipo de dato subyacente sobre el cual el nuevo de tipo de dato esta creado.
+Ejemplo:
+
+type dinero int -- donde tipo dinero trabaja con el dato subyacente int
+
+cuando un tipo de valor numerico es unsigned quiere decir que no permite valores negativos
+en go no se pueden hacer conversiones implicitas entre valores enteros, se debe hacer la conversion de forma explicita
+
+la diferencia entre row string literal y string literal es que el row string respeta y permite nuevas lineas en el texto, string literal no
+
+La diferencia de las constantes declaradas con tipo y las declaradas con valor direcytamente es que las declaradas con tipo siguen las reglas 
+estrictas de tipos de dato en Go. 
+Lo que significa que, hacer esto:
+
+type entero int 
+cons var1 = 1
+const var2=  var1 
+
+Es posible porque no se declara un tipo explicitamente para var1 siempre que var1 y var2 tengan tipos de datos compatibles.
+Pero si la declaracion es asi:
+type entero int // un tipo de dato personalizado con valor subyacente int
+cons var1 int = 1
+const var2=  var1
+
+Esto va generar un mensaje de error porque necesita hacer la conversion explicitamente al tipo entero
+
+
+el bigshifting es una tecnica para mover digitos binarios a la dercha o izquierda. TOma el digito mas signifivo y lo mueve a derecha o izquierda.
+Ejemplo:
+    a := 4 // 4 en binario es 100
+
+
+	b := a << 2 //AL hacer bigshifting al izquierda, el 1 que es el bit mas significativo se mueve un espacio a la izquierda y el lugar del 1 se pone un 0.
+
+Si fuera la derecha del 1 entonces se elimina un 0
+
+iota aumenta su contador con cada declaracion por Ejemplo :
+const (
+	_       = iota // deseacha el 0
+	actual  = 2023
+	a       = 2023 + iota
+	b       = 2023 + iota
+	c       = 2023 + iota
+	d       = 2023 + iota
+)
+
+como hay 1 una declaracion despues del _ iota sube su contador de 1 a 2, sino hubiera otra declaracion entonces iota seria 1 
+En go no existe el ciclo while ni do while
+
+EN go si el condicional switch no contiene una condicion, go lo interpreta como switch true entonces en los posibles casos debe haber uno
+que evalue a true
+
+
+En go si se supera la capacidad de un slice al agregar nuevos elementos con append. El arreglo original se borra, se crea otro asignando memoria
+dinamica y se retorna con los valores que tenia el arreglo original concatenando los nuevos valores agregados.
+
+cuando el indice o propiedad de un mapa no existe se puede saber de la siguiente forma:
+
+val, ok := m1["llave"]
+
+val es el valor y ok indica si existe o no, si existe, ok retorna true, de otra forma retorna false
+
+los metodos son funciones o extensiones que se aplican al tipo de receptor del todo.
+funcion igual que las extensiones de .net
+con la exepcecion de que los metodos en go se extienden al tipo de receptor pero
+pueden tener ´parametros personalizados
+
+
+firma de una funcion o metodo:
+func (r receptor) identificador(parametros) (retorno(s)) {codigo}
+
+En go todos los tipos implementan la interfaz vacia, lo que si la interfaz vacia es el parametro entonces ese valor soporta cualquier tipo 
+Como buena practica en go, el manejo de los json debe hacerse poniendo las propiedad en mayuscula
+
+la diferencia entre funcion y metodo en go, es que el metodo recibe un receptor, que basicamente es un tipo de dato 
+que funciona como una instancia, es decir, cualquier funcion que tieen como receptor un tipo de x interfaz o estructura
+puede implementarse en cual valor que sea de ese tipo x interfaz o estructura
+
+cada funcion main en go es una go rutina
+
+Go ejecuta las go rutinas al final despues del codigo secuencial. Y con el waitgroup usando el metodo wait le indica que espere al main 
+si hay alguna go rutina ejecutandose, para que luego el main finalice el proceso.
