@@ -122,3 +122,16 @@ cada funcion main en go es una go rutina
 
 Go ejecuta las go rutinas al final despues del codigo secuencial. Y con el waitgroup usando el metodo wait le indica que espere al main 
 si hay alguna go rutina ejecutandose, para que luego el main finalice el proceso.
+
+Compilación cruzada.
+EN go es posible compilar para un SO y arquitectura especificos
+Ejemṕlo:
+	Correr los siguientes comandos en la terminal 
+		GOOS=windows/linux/darwing(MAC) GOARCH=amd64/x64/x86 -- arquitectura del procesador
+
+		
+Para que las funciones de un paquete puedan ser exportadas, deben llamarse en Mayuscula
+Hay dos tipos de canales en go, los canales com buffer y sin buffer
+
+cuando un canal sin bufer no tiene una rutina que recibe el dato, bloquea y termina el programa automaticamente
+Un canal con buffer no necesita otra go rutina para recibir valores. En la go rutina principal lo puede hacer

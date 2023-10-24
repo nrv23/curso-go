@@ -1,0 +1,24 @@
+package main
+
+import "fmt"
+
+func main() {
+
+	// creacion de un canal
+
+	ca := make(chan int, 1) // buffered channel o canal con búfer
+	/*
+		el segunoo argumento del metodo make es el tamaño del buffer o cantidad de elementos del tipo de canal que
+		van a ser almacenados.
+	*/
+
+	ca <- 42 // asignar valores a un canal
+	ca <- 43
+	/*
+		este codigo va dar eerror porque va superar el tamaño del buffer del canal.
+		EL buffer tiene un tamaño de 1 pero se le estan asigando dos valores
+	*/
+	fmt.Println(<-ca) /*
+		La go rutina principal recibe el valor e imprime el valor del canal
+	*/
+}
